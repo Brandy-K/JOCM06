@@ -1,0 +1,76 @@
+body{
+    background-color: aliceblue;
+}
+p{
+    font-size: small;
+
+}
+#comencaPartida{
+    background-color: aquamarine;
+
+
+}
+div{
+    display: flex;
+    justify-content: end;
+}
+#titol{
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   background-color:#d59bf6;
+   height:60px;
+   font-size:40px ;
+   letter-spacing:10px ;
+   
+}
+
+.player-info {
+    background-color: pink;
+    padding: 20px;
+    border-style: solid;
+    border-radius: 5%;
+    /*changed from 1*/
+    max-width: 150px;
+    
+}
+
+.game-area {
+    flex: 1; /* This takes up the remaining space between the player info sections */
+    display: flex;
+    justify-content: center; /* Center the content inside game-area */
+    align-items: center; /* Vertically center the game content */
+    padding: 20px;
+    
+    
+    
+
+
+}
+.game-area img {
+    max-width: 50%;
+    height: auto;
+    border: solid;
+    border-radius: 5%;
+}
+.main{
+    background-color: beige;
+   /* display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh; */
+
+}
+.content{
+    display: flex;
+    justify-content: space-between;
+   /* align-items: stretch; Stretch all sections to be the same height */
+    width: 100%; /* Full width */
+   
+  
+}
+#Botons{
+     padding-top: 3%;
+    
+     
+}

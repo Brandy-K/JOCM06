@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <title>Document</title>
+</head>
+<body>
+<div>
+    <input id="paraulaSecret" type="password" placeholder="introdueix una paraula">
+    <span><i id="mostrar" class="far fa-eye" onclick="mostrarParaula()"></i></span>
+ 
+    <button id="comencaPartida" onclick="ComencaPartida()">començaPartida</button>
+</div>
+<section>    
+    <p id="paraulaactual" class="paraula-secreta"></p>
+</section>
+
+<h5 id="titol">Començar partida</h5>
+
+<main>
+
+    <section class="main"> 
+        
+        <!--<div class="title">Començar partida</div>-->
+        <section class="content">
+            
+            <section class="player-info">
+               <h5>Jugador 1</h5>
+                <p id="PuntsPartidesActuals">Punts Partides Actuals<br>0</p>
+                <p id="TotalPartides">Total Partides<br>0</p>
+                <p id="PartidesGuanyades">Partides Guanyades<br>0</p>
+                <p id="PartidaAmbMésPunts">Partida Amb Més Punts:<br>4/10/2024 15:33 - 10 punts</p>
+            </section>
+            <section class="game-area">
+                <img id="Imatgesjoc" src="Imatgesjoc/penjat_0.jpg" alt="Images Joc">
+                <!--Aqui contingut de joc-->
+            </section>
+            <section class="player-info">
+                <h5>Jugador 2</h5>
+                <p id="PuntsPartidesActuals">Punts Partides Actuals<br>0</p>
+                <p id="TotalPartides">Total Partides<br>0</p>
+                <p id="PartidesGuanyades">Partides Guanyades<br>0</p>
+                <p id="PartidaAmbMésPunts">Partida Amb Més Punts:<br>4/10/2024 15:33 - 10 punts</p>
+             </section>
+        </section>
+    </section>
+</main>
+<section id="Botons">   
+    <button onclick="mostrarContingutBoto(this);">A</button>
+    <button onclick="mostrarContingutBoto(this);">B</button>
+    <button onclick="mostrarContingutBoto(this);">C</button>
+    <button onclick="mostrarContingutBoto(this);">D</button>
+    <button onclick="mostrarContingutBoto(this);">E</button>
+    <button onclick="mostrarContingutBoto(this);">F</button>
+    <button onclick="mostrarContingutBoto(this);">G</button>
+    <button onclick="mostrarContingutBoto(this);">H</button>
+    <button onclick="mostrarContingutBoto(this);">I</button>
+    <button onclick="mostrarContingutBoto(this);">J</button>
+    <button onclick="mostrarContingutBoto(this);">K</button>
+    <button onclick="mostrarContingutBoto(this);">L</button>
+    <button onclick="mostrarContingutBoto(this);">M</button>
+    <button onclick="mostrarContingutBoto(this);">N</button>
+    <button onclick="mostrarContingutBoto(this);">O</button>
+    <button onclick="mostrarContingutBoto(this);">P</button>
+    <button onclick="mostrarContingutBoto(this);">Q</button>
+    <button onclick="mostrarContingutBoto(this);">R</button>
+    <button onclick="mostrarContingutBoto(this);">S</button>
+    <button onclick="mostrarContingutBoto(this);">T</button>
+    <button onclick="mostrarContingutBoto(this);">U</button>
+    <button onclick="mostrarContingutBoto(this);">V</button>
+    <button onclick="mostrarContingutBoto(this);">W</button>
+    <button onclick="mostrarContingutBoto(this);">X</button>
+    <button onclick="mostrarContingutBoto(this);">Y</button>
+    <button onclick="mostrarContingutBoto(this);">Z</button>
+</section>
+
+<script src="joc.js"></script>
+</body>
+</html>
