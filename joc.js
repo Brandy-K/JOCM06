@@ -5,6 +5,8 @@ const buttonObj = document.getElementById("comencaPartida");
 const titolObj = document.getElementById("titol");
 const jocImatgeObj = document.getElementById("Imatgesjoc");
 const botonsObj = document.getElementById("Botons");
+const letterButtons = botonsObj.querySelectorAll(".letter-button"); 
+//variables
 let paraulaSecreta;
 let paraulaactual = [];
 let jugadafallada = 0;
@@ -13,6 +15,7 @@ let currentPoints = 0;
 let totalGames = 0;
 let gamesWon = 0;
 let highestScore = { points: 0, date: '' };
+let consecutiveCorrectGuesses = 0; //how many letters have been guessed correctly consecutely
 
 // Player Info DOM Elements
 const pointsCurrentGame = document.getElementById("PuntsPartidesActuals");
@@ -20,9 +23,23 @@ const totalGamesPlayed = document.getElementById("TotalPartides");
 const gamesWonInfo = document.getElementById("PartidesGuanyades");
 const highestScoreInfo = document.getElementById("PartidaAmbMésPunts");
 
-// para comenca partida
-function ComencaPartida() {
 
+// Function to enable/disable letter buttons with styling
+function disableLetterButtons(disable = true, borderColor = 'red', textColor = 'red') {
+    letterButtons.forEach(button => {
+        button.disabled = disable;
+        button.style.border = `1px solid ${borderColor}`;
+        button.style.color = textColor;
+    });
+}
+
+// Disable letter buttons by default with red border and text
+window.addEventListener('DOMContentLoaded', () => {
+    disableLetterButtons(true);
+});
+
+// para comenca partida
+function ComencaPartida() {    
     reiniciarElJoc();
     paraulaSecreta = inputObj.value.toLowerCase(); // Paraula secreta
 
@@ -33,12 +50,12 @@ function ComencaPartida() {
     } else if (!isNaN(paraulaSecreta)) {
         alert("La paraula no pot contenir números");
     } else {
+        disableLetterButtons(false);
         actualitzaParaulaActual(); // crear els --
         mostrarParaulapantalla(); // Display els --
 
         currentPoints = 0; //reiniciar els puntas
-        pointsCurrentGame.textContent = currentPoints;
-         
+        pointsCurrentGame.textContent = currentPoints;         
         // Disable the input and the button when the comenca button is clicked
         inputObj.disabled = true;
         buttonObj.disabled = true;
@@ -46,7 +63,7 @@ function ComencaPartida() {
         titolObj.style.backgroundColor = "";
         titolObj.value= "";        
         jocImatgeObj.src =  "Imatgesjoc/penjat_0.jpg";
-        botonsObj.disabled = true; //disable the letters.
+        disableLetterButtons(true); //disable the letters.
         
     }
 }
@@ -82,37 +99,43 @@ function mostrarParaulapantalla() {
 
 // Function for the guessed letters
 function mostrarContingutBoto(buttonElement) {
-    let paraulaInsertada = buttonElement.innerText.toLowerCase(); // Get the letter from the clicked button
-    let trobat = false; // stop si la lletra esta en la palabra
-    let lletresCorrecters =0;
+    let paraulaInsertada = buttonElement.innerText.toLowerCase();
+    let trobat = false;  // Flag to track if the letter is in the word
+    let letterOccurrences = 0;  // Counter for occurrences of the guessed letter
 
-    // Check if the paraula entrada is the same as the paraula secreta
+    // Check if the guessed letter is in the secret word
     for (let i = 0; i < paraulaSecreta.length; i++) {
         if (paraulaSecreta[i] === paraulaInsertada) {
-            paraulaactual[i] = paraulaSecreta[i]; // Replace the - with the correct letter
+            paraulaactual[i] = paraulaSecreta[i];  // Replace placeholder with correct letter
             trobat = true;
-            lletresCorrecters++;
+            letterOccurrences++;  // Increment occurrences counter
         }
     }
-    
-    
-    if (trobat) {
+   
+    // Disable the button and turn text and border red
+    buttonElement.disabled = true;
+    buttonElement.style.border = "1px solid red";
+    buttonElement.style.color = "red";
 
-        mostrarParaulapantalla(); // Si la lletra esta trobat, update the display
-        currentPoints += lletresCorrecters; //add a point when the letter is guessed correctly.
+    if (trobat) {
+        consecutiveCorrectGuesses++;  // Increase consecutive correct guesses
+        // Add points based on consecutive correct guesses, multiplied by letter occurrences
+        currentPoints += consecutiveCorrectGuesses * letterOccurrences;        
+        mostrarParaulapantalla();  // Update displayed word
 
         // Check if the word is completely guessed
-        if (!paraulaactual.includes("-")) {
-            
+        if (!paraulaactual.includes("-")) {            
             updatePlayerInfo(true); //
             // enable the input and button
             inputObj.disabled = false;
             buttonObj.disabled = false;
             titolObj.style.backgroundColor = "green";  //if the letter is guessed correctly, set the background to green.
             setTimeout(function() { //to delay alert and update the last letter
-                console.log("Has guanyat!");
-                // reiniciarElJoc(); // Reset game after winning
+                console.log("Has guanyat!");                
+                reiniciarElJoc();
+                  // Reset game after winning
             }, 100);
+            
         }
         
     } else {
@@ -120,21 +143,19 @@ function mostrarContingutBoto(buttonElement) {
         currentPoints = Math.max(0, currentPoints - 1); // Deduct 1 point but prevent negative
         jocImatgeObj.src = `Imatgesjoc/penjat_${jugadafallada}.jpg`;  //when the player guesses the wrong letter, the image is updated
 
-
         if (jugadafallada >= maxAttempts) {
-            titolObj.style.backgroundColor = "red"; //background color changes to red if the player loses.
-            
+            titolObj.style.backgroundColor = "red"; //background color changes to red if the player loses.        
             alert("You've lost.La paraulaSecreta es:"+ paraulaSecreta);
-            titolObj.style.backgroundColor = "red";
             mostrarParaulaCompleta(); // Reveal the word
             inputObj.disabled = false;    //torna a activa el boto i el input when you lose the game.
             buttonObj.disabled = false;
             inputObj.value = "";
-             reiniciarElJoc();  // reiniciar el joc
-             
+            //reiniciarElJoc();  // reiniciar el joc
+                        
         }
-            
+          
     }
+      pointsCurrentGame.textContent = `Punts partida actuals: ${currentPoints}`;
   
 }
 
@@ -146,37 +167,36 @@ function mostrarParaulaCompleta() {
 
 
 // reiniciar el Joc
-function reiniciarElJoc() {
-    
-
+function reiniciarElJoc() {    
     // Clear the input and game state
     paraulaactual = [];
     jugadafallada = 0;
 
-    // Reset the title back to the original
+    // Reset the title and image back to the original
     titolObj.textContent = "Començar partida";
     titolObj.style.backgroundColor = "";
-
-  jocImatgeObj.src =  "Imatgesjoc/penjat_0.jpg";
+    jocImatgeObj.src =  "Imatgesjoc/penjat_0.jpg";
+    disableLetterButtons(true);
 }
 
 // Update player info after the game ends
 function updatePlayerInfo(won) {
-    totalGames++;  //If the player wins a game, increase the totalgames by 1
-    totalGamesPlayed.textContent = totalGames;
-
+    totalGames++;  // Increment total games by 1
+    totalGamesPlayed.textContent = `Total Partides: ${totalGames}`;
     if (won) {
         gamesWon++;
-        gamesWonInfo.textContent = `${gamesWon} (${((gamesWon / totalGames) * 100).toFixed(2)}%)`; // get the percentage on the total number of matches.
-
+        gamesWonInfo.textContent = `Partides Guanyades: ${gamesWon} (${((gamesWon / totalGames) * 100).toFixed(2)}%)`;
         // Check for highest score
         if (currentPoints > highestScore.points) {
             const currentDate = new Date().toLocaleString();
             highestScore.points = currentPoints;
             highestScore.date = currentDate;
-            highestScoreInfo.textContent = `${currentDate} - ${currentPoints} punts`;
+            highestScoreInfo.textContent = `Partida amb més punts: ${currentDate} - ${currentPoints} punts`;
         }
     } else {
-        gamesWonInfo.textContent = `${gamesWon} (${((gamesWon / totalGames) * 100).toFixed(2)}%)`;
+        gamesWonInfo.textContent = `Partides Guanyades: ${gamesWon} (${((gamesWon / totalGames) * 100).toFixed(2)}%)`;
     }
+
+    // Update current points for the current game
+    pointsCurrentGame.textContent = `Punts partida actuals: ${currentPoints}`;
 }
