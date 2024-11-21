@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="inputParaula">
+        <input
+          id="paraulaSecreta"
+          type="password"
+          placeholder="Introdueix una paraula"
+        />
+        <span
+          onmousedown="mostrarParaula()"
+          onmouseup="ocultarParaula()"
+          class="material-symbols-outlined eye"
+        >
+          visibility
+        </span>
+      </div>
+
+      <button id="comencar-partida" class="btn" onclick="comencarPartida();">Començar partida</button>
+    </header>
+
+    <section id="seccio-paraula" class="seccio-paraula">
+      <p id="paraula" class="paraula">Començar partida</p>
+    </section>
+
+    <section class="seccio-jugador">
+      <article class="jugador jugador1">
+        <div class="text-jugador">JUGADOR 1</div>
+        <br />
+        <div>PUNTS PARTIDES ACTUALS</div>
+        <div id="punts-actuals">0</div>
+        <br />
+        <div>TOTAL PARTIDES</div>
+        <div id="total-partides">0</div>
+        <br />
+        <div>PARTIDES GUANYADES</div>
+        <div id="partides-guanyades">0</div>
+        <br />
+        <div>PARTIDA AMB MÉS PUNTS:</div>
+        <div id="partida-mes-punts">07/10/2024 15:45 - 10 punts</div>
+      </article>
+      <article class="imatge">
+        <img id="imgPenjat" src="img/penjat_0.jpg" />
+      </article>
+      <article class="jugador jugador2">
+        <div class="text-jugador">JUGADOR 2</div>
+        <br />
+        <div>PUNTS PARTIDES ACTUALS</div>
+        <div id="punts-actuals">0</div>
+        <br />
+        <div>TOTAL PARTIDES</div>
+        <div id="total-partides">0</div>
+        <br />
+        <div>PARTIDES GUANYADES</div>
+        <div id="partides-guanyades">0</div>
+        <br />
+        <div>PARTIDA AMB MÉS PUNTS:</div>
+        <div id="partida-mes-punts">07/10/2024 15:45 - 10 punts</div>
+      </article>
+    </section>
+
+    <section class="alfabet">
+      <button id="boto_1" onclick="jugar(this);">A</button>
+      <button id="boto_2" onclick="jugar(this);">B</button>
+      <button id="boto_3" onclick="jugar(this);">C</button>
+      <button id="boto_4" onclick="jugar(this);">D</button>
+      <button id="boto_5" onclick="jugar(this);">E</button>
+      <button id="boto_6" onclick="jugar(this);">F</button>
+      <button id="boto_7" onclick="jugar(this);">G</button>
+      <button id="boto_8" onclick="jugar(this);">H</button>
+      <button id="boto_9" onclick="jugar(this);">I</button>
+      <button id="boto_10" onclick="jugar(this);">J</button>
+      <button id="boto_11" onclick="jugar(this);">K</button>
+      <button id="boto_12" onclick="jugar(this);">L</button>
+      <button id="boto_13" onclick="jugar(this);">M</button>
+      <button id="boto_14" onclick="jugar(this);">N</button>
+      <button id="boto_15" onclick="jugar(this);">O</button>
+      <button id="boto_16" onclick="jugar(this);">P</button>
+      <button id="boto_17" onclick="jugar(this);">Q</button>
+      <button id="boto_18" onclick="jugar(this);">R</button>
+      <button id="boto_19" onclick="jugar(this);">S</button>
+      <button id="boto_20" onclick="jugar(this);">T</button>
+      <button id="boto_21" onclick="jugar(this);">U</button>
+      <button id="boto_22" onclick="jugar(this);">V</button>
+      <button id="boto_23" onclick="jugar(this);">W</button>
+      <button id="boto_24" onclick="jugar(this);">X</button>
+      <button id="boto_25" onclick="jugar(this);">Y</button>
+      <button id="boto_26" onclick="jugar(this);">Z</button>
+    </section>
+
+    <script src="script/joc.js"></script>
+  </body>
+</html>
